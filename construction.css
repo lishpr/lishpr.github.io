@@ -1,0 +1,36 @@
+body {
+    font-family: cairo;
+    color: rgb(212,212,212);
+    background: rgb(30,30,30);
+}
+
+.navbar.scrolled {
+    background: rgb(60,60,60);
+    transition: background 500ms;
+}
+
+.navbar-brand span {
+    color: rgb(212,212,212);
+}
+
+#mainNavbar .nav-link {
+    font-weight: 400;
+    color: rgb(0,122,204);
+}
+
+#mainNavbar .navbar-brand {
+    font-weight: 100;
+    color: rgb(173,173,173);
+}
+
+#mainNavbar .nav-link:hover {
+    background: rgb(45,45,45)
+}
+
+.icons {
+    color: rgba(156,220,254)
+}
+
+.container {
+    padding-top: 20%;
+}

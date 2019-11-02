@@ -1,0 +1,87 @@
+body {
+    background: rgb(30,30,30);
+}
+
+.navbar.scrolled {
+    background: rgb(60,60,60);
+    transition: background 500ms;
+}
+
+#mainNavbar .navbar-brand {
+    font-family: cairo;
+    font-weight: 100;
+    color: rgb(173,173,173);
+}
+
+#jobtitle {
+    font-weight: 700;
+}
+
+.navbar-brand span {
+    color: rgb(212,212,212);
+}
+
+#mainNavbar .navbar-toggler {
+    color: rgb(173,173,173);
+}
+
+#toptext {
+    font-family: cairo;
+    color: rgb(0,122,204);
+}
+
+#toptext span {
+    color: rgb(128,128,128)
+}
+
+#mainNavbar .nav-link {
+    font-family: cairo;
+    font-weight: 400;
+    color: rgb(0,122,204);
+}
+
+#mainNavbar .nav-link:hover {
+    background: rgb(45,45,45)
+}
+
+.icons {
+    color: rgba(156,220,254)
+}
+
+#contents {
+    font-family: cairo;
+    color: rgb(212,212,212)
+}
+
+.table {
+    color: rgb(212,212,212);
+    padding-bottom: 5rem;
+    font-family: cairo;
+}
+
+@media (max-width: 700px) {
+    #toptext h1 {
+        font-size: 20px;
+    }
+}
+
+ul {
+    font-family: cairo;
+    color: rgb(212,212,212);
+}
+
+.jumbotron{
+    background: rgb(56,56,56);
+    color: rgb(212,212,212);
+    margin-top: 5%;
+}
+
+h4 span{
+    background: rgb(225, 11, 11)
+}
+
+.box {
+    width: 100%;
+    height: 250px;
+    background-size: auto;
+}
