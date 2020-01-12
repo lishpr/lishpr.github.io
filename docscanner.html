@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <link href="fontawesome-free-5.11.2-web\css\all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cairo:300,400,700&display=swap" rel="stylesheet">
+    <title>Camera Document Scanner</title>
+</head>
+<body>
+    <nav id="mainNavbar" class="navbar navbar-dark navbar-expand-md fixed-top">
+        <a href="index.html" class="navbar-brand">Li<span>/</span>WORK</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navLinks">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navLinks">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="underconstruction.html" class="nav-link">BLOG</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://github.com/lishpr" class="nav-link">GITHUB</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h2 style="font-family: cairo">
+                Camera Document Scanner
+            </h2>
+            <hr>
+            <h5 style="font-family: cairo">
+                <em>Written in Python, from CSE 252A: Computer Vision.</em>
+            </h5>
+            <p class="card-text" id="contents">
+                Taking a photo of a document is way easier than scanning it. <br>
+                However, it's almost impossible to hold your arms straight enough so that the quality of your photo could match that of a scan. <br>
+                The good news is, there are several apps available to improve the quality of your photo. <br>
+                And this project is try to demystify the scanner apps and create my own version of it! <br>
+
+            </p>
+        </div>
+    </div>
+
+    <section class="container">
+
+    <p class="card-text" id="contents">
+        The project is completed in three steps. <br>
+        1. Recognize the corners of the document; <br>
+        2. Rectify the document with affine transformation so that it's no longer tilted; <br>
+        3. Make it nice looking!
+    </p>
+
+    <h4 class="icons" id="courses">Step 1: Edge and Corner Detection</h4>
+    <p class="card-text" id="contents">
+        We humans could most of the times recognize the edges or corners of objects. 
+        What we perceive as "edges" are gaps in contiguity in what we see. <br>
+        For example, consider we have a brown desk and a white wall. 
+        Then, the gap from brown to white could be recognized by us humans as edges. <br>
+        Simulating this attribute of edge detection in human eyes, we could make computers "see" edges.
+    </p>
+    <hr>
+    <p class="card-text" id="contents">
+        We could take the finite difference, or gradient of the image. 
+        Where the color in the image is "smooth", the gradient is small.
+        Similarly, where the color in the image changes, the gradient is big. <br>
+        Below is one example of this attribute. 
+        On the right is the visualization of the gradient of the image of the library on the left. <br>
+        The edges of the library have already popped out.
+    </p>
+
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+            </div>
+            <div class="col-sm">
+                <img src="docscanner/geisel.jpeg" alt="height: 200px" class="img-thumbnail">
+                <p class="card-text text-center" id="contents">
+                    A grayscale picture of the Geisel Library at UCSD
+                </p>
+            </div>
+            <div class="col-sm">
+                <img src="docscanner/ggradient.png" alt="height: 200px" class="img-thumbnail">
+                <p class="card-text text-center" id="contents">
+                    The gradient of the picture on the left
+                </p>
+            </div>
+            <div class="col-sm">
+            </div>
+        </div>
+    </div>
+    <hr>
+    <p class="card-text" id="contents">
+        But this is not good enough. 
+        Many minor gaps in color, which are not edges, are also recorded by taking the gradient.
+        Therefore, we need to keep the biggest gradient value in a region, and ignore the rest, 
+        to make sure that what we are actually not recording gaps that are not edges. <br>
+        This process is called Non-Maximum Supression. Code for which is shown below.
+    </p>
+    <div class="alert alert-light" role="alert">
+        <pre><code>
+            def nms(g_mag, ws=5):
+                copy = g_mag.copy()
+                check = np.zeros(g_mag.shape)
+                for i in range(0, g_mag.shape[0] - ws, ws):
+                    for j in range(0, g_mag.shape[1] - ws, ws):
+                    window = copy[i : i + ws, j : j + ws]
+                    ind = np.where(window == window.max())
+                    check[i + ind[0][0], j + ind[1][0]] = g_mag[i + ind[0][0], j + ind[1][0]]
+                return check
+
+            // g_mag is the magnitude of the gradient shown in the visualization.
+            // ws is the window size of the region where NMS is performed.
+        </code></pre>
+    </div>
+    <p class="card-text" id="contents">
+        After we have defined edges to be "changes in values of color", we could expand it to define corners. <br>
+        Corners are places where have a large change in color intensity in any direction. <br>
+        After nailing the definition of corners, we may find that in contrast to flat regions or edge regions,
+        the gradient is large in two linearly independent directions. <br>
+        A smart algorithm for finding such region is called the Shi-Tomasi Detector, which is a kind of PCA.
+        The pseudocode for which is shown below
+    </p>
+    <div class="alert alert-light" role="alert">
+        <pre><code>
+            def cornerdetection:
+                Filter image with Gaussian Filter
+                Compute the gradient of the image
+                Move window over image, for each window:
+                    Find the matrix for this window
+                    Find the eigenvalues of this matrix
+                    if the two eigenvalues are both large, corner detected:
+                        let e(x,y) be the smaller of the eigenvalues
+                        (x,y) is a corner if it's the local maximum and larger than a set threshold*
+            
+            // the threshold is set empirically.
+        </code></pre>
+    </div>
+
+    </section>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        $(function(){
+            $(document).scroll(function(){
+                var $nav = $("#mainNavbar")
+                $nav.toggleClass("scrolled", $(this).scrollTop() > $nav.height())
+            })
+        })
+    </script>
+    
+</body>
+</html>
