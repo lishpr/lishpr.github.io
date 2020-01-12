@@ -51,99 +51,106 @@
     <section class="container">
 
     <p class="card-text" id="contents">
-        The project is completed in three steps. <br>
-        1. Recognize the corners of the document; <br>
-        2. Rectify the document with affine transformation so that it's no longer tilted; <br>
-        3. Make it nice looking!
+        This compiler is done in three parts. 
     </p>
+    <li class="card-text" id="contents">
+        First, the lexing and parsing part, 
+        which is the part that given any code, 
+        dissolves them into values through lexing, 
+        then assemble the values into tokens through parsing. 
+    </li>
+    <li class="card-text" id="contents">
+        Second, the evaluation part,
+        which is the part that does the arithmetic computation when given tokens.
+    </li>
+    <li class="card-text" id="contents">
+        Last, the REPL part,
+        which is a shell that does reading, evaluation, printing, then <em>loop</em>!
+        So that you could enter commands into the shell that utilizes the first two parts to offer solutions.
+    </li>
+    <br>
+        
 
-    <h4 class="icons" id="courses">Step 1: Edge and Corner Detection</h4>
+    <h4 class="icons" id="courses">Part 1: Lexing and Parsing</h4>
     <p class="card-text" id="contents">
-        We humans could most of the times recognize the edges or corners of objects. 
-        What we perceive as "edges" are gaps in contiguity in what we see. <br>
-        For example, consider we have a brown desk and a white wall. 
-        Then, the gap from brown to white could be recognized by us humans as edges. <br>
-        Simulating this attribute of edge detection in human eyes, we could make computers "see" edges.
+        First, we have some tokens in mind that represents many values or grammatical functions, such as
+        <code>TRUE</code>, <code>FALSE</code>, <code>+</code>, <code>*</code>, <code>let ... in</code>, etc.
+        Then we should determine the kind of code that we should interpret into those tokens.<br>
+    </p>
+    <p class="card-text" id="contents">
+        For example, when we encounter a typed <code>TRUE</code> in the code, 
+        we want to interpret this to the <code>TRUE</code> token. Similarly, 
+        we could interpret <code>+</code> into a <code>Plus</code> token.<br>
+    </p>
+    <p class="card-text" id="contents">
+        Those are relatively simple. However, when in <code>let ... in</code> statements, 
+        or <code>if ... then ... else</code> statements,
+        we need to interpret the skeleton of those statements into their respective tokens,
+        and everything else into some other tokens. <br>
+        This is done by pattern matching, which instructs the parser that, 
+        when a pattern such as <code>let ... in</code> is seen, dissolve them into one <code>let</code> token
+        and a variable assignment token. For example, in the following example, when some programmer codes something like below,
+    </p>
+    <pre class="bg-light"><code>
+        let foo = \\x -> if y then z else w in foo
+    </code></pre>
+    <p class="card-text" id="contents">
+        the lexer and parser return some constructed tokens as the following
+    </p>
+    <pre class="bg-light"><code>
+        ELet "foo" (ELam "x" (EIf (EVar "y") (EVar "z") (EVar "w"))) (EVar "foo")
+    </code></pre>
+
+    <p class="card-text" id="contents">
+        As we have the ability to lex and parse what we code into tokens,
+        we may go further into manipulating the tokens.
     </p>
     <hr>
+    <h4 class="icons" id="courses">Part 2: Evaluation</h4>
+    
     <p class="card-text" id="contents">
-        We could take the finite difference, or gradient of the image. 
-        Where the color in the image is "smooth", the gradient is small.
-        Similarly, where the color in the image changes, the gradient is big. <br>
-        Below is one example of this attribute. 
-        On the right is the visualization of the gradient of the image of the library on the left. <br>
-        The edges of the library have already popped out.
+        Now that we have a lot of tokens, for example,
+        we could have <code>1 + 2</code> - lexed and parsed -> <code>EBin Plus (EInt "1") (EInt "2")</code>.
+        The problem thus became, how do we obtain <code>3</code> (or <code>EInt "3"</code>) from the tokens?
     </p>
 
+    <p class="card-text" id="contents">
+        We could try define that, if ever <code>Plus</code> is encountered, 
+        add the two integers associated with the <code>Plus</code>. And that does work for now.
+    </p>
+    <p class="card-text" id="contents">
+        However, what if we have another <code>EBin</code> as one of the operands like in <code>1 + 3 * 4</code> 
+        which would be parsed into <code>EBin Plus (EInt "1") (EBin Mul (EInt "3") (EInt "4"))</code>?
+    </p>
+    <p class="card-text" id="contents">
+        The "two integers" approach couldn't handle another <code>EBin</code>.
+        And this should be solved by defining it <em>recursively</em>. <br>
+        When we have two operands as integers, we could evaluate it right away.
+        When either of the two operands is a <code>EBin</code>, we do another round of evaluation.
+    </p>
+    <p class="card-text" id="contents">
+        So far, this is working properly. With just one glitch to be taken care of, which is the order of operation.
+        We could add a line in the parser to make the priority of multiplication higher than plus and minus. 
+        And that's basically it.
+    </p>
     <hr>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
-            </div>
-            <div class="col-sm">
-                <img src="docscanner/geisel.jpeg" alt="height: 200px" class="img-thumbnail">
-                <p class="card-text text-center" id="contents">
-                    A grayscale picture of the Geisel Library at UCSD
-                </p>
-            </div>
-            <div class="col-sm">
-                <img src="docscanner/ggradient.png" alt="height: 200px" class="img-thumbnail">
-                <p class="card-text text-center" id="contents">
-                    The gradient of the picture on the left
-                </p>
-            </div>
-            <div class="col-sm">
-            </div>
-        </div>
-    </div>
-    <hr>
+    <h4 class="icons" id="courses">Part 3: Read-Eval-Print Loop</h4>
     <p class="card-text" id="contents">
-        But this is not good enough. 
-        Many minor gaps in color, which are not edges, are also recorded by taking the gradient.
-        Therefore, we need to keep the biggest gradient value in a region, and ignore the rest, 
-        to make sure that what we are actually not recording gaps that are not edges. <br>
-        This process is called Non-Maximum Supression. Code for which is shown below.
+        In the previous two parts, we have completed a working languages that does arithmetic calculations.
+        But we have yet got an interface that could have the user to use the language.
+        So in this part, we are going to write a shell that could: <br>
+        1. Do some basic arithmetic calulations. <br>
+        2. Allow you to define variables. <br>
+        3. Allow some basic I/O operations. <br>
+        4. Have a counter that indicates the number of commands have been executed.
     </p>
-    <div class="alert alert-light" role="alert">
-        <pre><code>
-            def nms(g_mag, ws=5):
-                copy = g_mag.copy()
-                check = np.zeros(g_mag.shape)
-                for i in range(0, g_mag.shape[0] - ws, ws):
-                    for j in range(0, g_mag.shape[1] - ws, ws):
-                    window = copy[i : i + ws, j : j + ws]
-                    ind = np.where(window == window.max())
-                    check[i + ind[0][0], j + ind[1][0]] = g_mag[i + ind[0][0], j + ind[1][0]]
-                return check
-
-            // g_mag is the magnitude of the gradient shown in the visualization.
-            // ws is the window size of the region where NMS is performed.
-        </code></pre>
+    <div class="text-center">
+        <img src="haskell/repl.png" class="rounded mx-auto d-block img-thumbnail" alt="...">
+        <p class="card-text" id="contents">
+            The attributes of my REPL
+        </p>
     </div>
-    <p class="card-text" id="contents">
-        After we have defined edges to be "changes in values of color", we could expand it to define corners. <br>
-        Corners are places where have a large change in color intensity in any direction. <br>
-        After nailing the definition of corners, we may find that in contrast to flat regions or edge regions,
-        the gradient is large in two linearly independent directions. <br>
-        A smart algorithm for finding such region is called the Shi-Tomasi Detector, which is a kind of PCA.
-        The pseudocode for which is shown below
-    </p>
-    <div class="alert alert-light" role="alert">
-        <pre><code>
-            def cornerdetection:
-                Filter image with Gaussian Filter
-                Compute the gradient of the image
-                Move window over image, for each window:
-                    Find the matrix for this window
-                    Find the eigenvalues of this matrix
-                    if the two eigenvalues are both large, corner detected:
-                        let e(x,y) be the smaller of the eigenvalues
-                        (x,y) is a corner if it's the local maximum and larger than a set threshold*
-            
-            // the threshold is set empirically.
-        </code></pre>
-    </div>
-
+    
     </section>
 
 

@@ -104,22 +104,20 @@
         to make sure that what we are actually not recording gaps that are not edges. <br>
         This process is called Non-Maximum Supression. Code for which is shown below.
     </p>
-    <div class="alert alert-light" role="alert">
-        <pre><code>
-            def nms(g_mag, ws=5):
-                copy = g_mag.copy()
-                check = np.zeros(g_mag.shape)
-                for i in range(0, g_mag.shape[0] - ws, ws):
-                    for j in range(0, g_mag.shape[1] - ws, ws):
-                    window = copy[i : i + ws, j : j + ws]
-                    ind = np.where(window == window.max())
-                    check[i + ind[0][0], j + ind[1][0]] = g_mag[i + ind[0][0], j + ind[1][0]]
-                return check
+    <pre class="bg-light"><code>
+        def nms(g_mag, ws=5):
+            copy = g_mag.copy()
+            check = np.zeros(g_mag.shape)
+            for i in range(0, g_mag.shape[0] - ws, ws):
+                for j in range(0, g_mag.shape[1] - ws, ws):
+                window = copy[i : i + ws, j : j + ws]
+                ind = np.where(window == window.max())
+                check[i + ind[0][0], j + ind[1][0]] = g_mag[i + ind[0][0], j + ind[1][0]]
+            return check
 
-            // g_mag is the magnitude of the gradient shown in the visualization.
-            // ws is the window size of the region where NMS is performed.
-        </code></pre>
-    </div>
+        // g_mag is the magnitude of the gradient shown in the visualization.
+        // ws is the window size of the region where NMS is performed.
+    </code></pre>
     <p class="card-text" id="contents">
         After we have defined edges to be "changes in values of color", we could expand it to define corners. <br>
         Corners are places where have a large change in color intensity in any direction. <br>
@@ -128,21 +126,19 @@
         A smart algorithm for finding such region is called the Shi-Tomasi Detector, which is a kind of PCA.
         The pseudocode for which is shown below
     </p>
-    <div class="alert alert-light" role="alert">
-        <pre><code>
-            def cornerdetection:
-                Filter image with Gaussian Filter
-                Compute the gradient of the image
-                Move window over image, for each window:
-                    Find the matrix for this window
-                    Find the eigenvalues of this matrix
-                    if the two eigenvalues are both large, corner detected:
-                        let e(x,y) be the smaller of the eigenvalues
-                        (x,y) is a corner if it's the local maximum and larger than a set threshold*
-            
-            // the threshold is set empirically.
-        </code></pre>
-    </div>
+    <pre class="bg-light"><code>
+        def cornerdetection:
+            Filter image with Gaussian Filter
+            Compute the gradient of the image
+            Move window over image, for each window:
+                Find the matrix for this window
+                Find the eigenvalues of this matrix
+                if the two eigenvalues are both large, corner detected:
+                    let e(x,y) be the smaller of the eigenvalues
+                    (x,y) is a corner if it's the local maximum and larger than a set threshold*
+        
+        // the threshold is set empirically.
+    </code></pre>
 
     </section>
 
