@@ -150,7 +150,49 @@
             The attributes of my REPL
         </p>
     </div>
-    
+    <p class="card-text" id="contents">
+        The content of <code>t2.hs</code> and <code>tAdd.hs</code> is
+    </p>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <pre class="bg-light"><code>
+            -- t2.hs
+            top =
+                let z  = 3 in
+                let y  = 2 in
+                let x  = 1 in
+                let z1 = 0 in
+                    (x + y) - (z + z1)
+
+                </code></pre>
+            </div>
+            
+            <div class="col-sm">
+                <pre class="bg-light"><code>
+            -- tAdd.hs
+            add =
+                let add1 x y = x + y in
+                    add1
+            ,
+            sub = 
+                let sub1 x y = add x (0 - y) in
+                    sub1
+                </code></pre>
+            </div>
+        </div>
+    </div>
+    <p class="card-text" id="contents">
+        It is worth noting that the implementation of <code>:load</code> involves
+        keeping an environment of variables that could be referenced by later commands.
+    </p>
+    <p class="card-text" id="contents">
+        And this concludes my compiler design.
+    </p>
+    <hr>
+    <br><br><br>
+    2020 Xiaoli Yu
+
     </section>
 
 
