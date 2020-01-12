@@ -96,7 +96,6 @@
             </div>
         </div>
     </div>
-    <hr>
     <p class="card-text" id="contents">
         But this is not good enough. 
         Many minor gaps in color, which are not edges, are also recorded by taking the gradient.
@@ -140,6 +139,66 @@
         // the threshold is set empirically.
     </code></pre>
 
+    <hr>
+    <h4 class="icons" id="courses">Step 2: Image Rectification</h4>
+    <div class="text-center">
+        <img src="docscanner/inverse.png" class="rounded mx-auto d-block img-thumbnail" alt="...">
+        <p class="card-text" id="contents">
+            Image Rectification
+        </p>
+    </div>
+    <p class="card-text" id="contents">
+        Now we have the ability to extract corners from an image, we could apply the ability to a real document,
+        extracting the corners of that document.
+        And what we want to accomplish in this step is shown below, rectify what's on the left 
+        to the good-looking rectified document on the right.
+    </p>
+
+    <div class="text-center">
+        <img src="docscanner/corner.png" class="rounded mx-auto d-block img-thumbnail" alt="...">
+        <p class="card-text" id="contents">
+            Corner Extraction
+        </p>
+    </div>
+    <p class="card-text" id="contents">
+        After obtaining the corners of the document, 
+        the intuitive way of rectifying the image would be 
+        "matching" the corners of the document to a rectangle. <br>
+        And that's basically what we do.
+    </p>
+    <p class="card-text" id="contents">
+        Through a trick called "affine transformation", where we manipulate the image in 3-D,
+        we could transform the image into any shape. The transformation matrix could be obtained
+        through the following program, given the corners of the source shape and the corners of the target shape.
+    </p>
+    <pre class="bg-light"><code>
+        def computeH(source_pts, target_pts):
+            H = np.zeros((3, 3))
+
+            A = source_pts[:,:3]
+            x4 = source_pts[:,3]
+            l = np.linalg.inv(A) @ x4
+            Ha = A @ np.diag(l)
+
+            B = target_pts[:,:3]
+            y4 = target_pts[:,3]
+            m = np.linalg.inv(B) @ y4
+            Hb = B @ np.diag(m)
+
+            H = Hb @ np.linalg.inv(Ha)
+            return H
+    </code></pre>
+    <p class="card-text" id="contents">
+        Up until now, our camera based scanner already looks pretty convincing. 
+        In the next step, we are going to solve some final issues.
+    </p>
+
+    <hr>
+    <h4 class="icons" id="courses">Step 3: Image Enhancing</h4>
+    <div class="container text-center">
+        <h1 class="icons"><i class="fas fa-hammer"></i></h1>
+        <h3 class="card-text" id="contents">The following chapter is actively under construction.</h3>
+    </div>
     </section>
 
 
