@@ -85,3 +85,8 @@ h4 span{
     height: 250px;
     background-size: auto;
 }
+
+.ftr{
+    background: rgb(56,56,56);
+    color: rgb(212,212,212);
+}
