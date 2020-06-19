@@ -8,7 +8,7 @@ body {
 }
 
 #mainNavbar .navbar-brand {
-    font-family: cairo;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 100;
     color: rgb(173,173,173);
 }
@@ -26,7 +26,7 @@ body {
 }
 
 #toptext {
-    font-family: cairo;
+    font-family: 'Montserrat', sans-serif;
     color: rgb(0,122,204);
 }
 
@@ -35,7 +35,7 @@ body {
 }
 
 #mainNavbar .nav-link {
-    font-family: cairo;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     color: rgb(0,122,204);
 }
@@ -49,14 +49,14 @@ body {
 }
 
 #contents {
-    font-family: cairo;
+    font-family: 'Montserrat', sans-serif;
     color: rgb(212,212,212)
 }
 
 .table {
     color: rgb(212,212,212);
     padding-bottom: 5rem;
-    font-family: cairo;
+    font-family: 'Montserrat', sans-serif;
 }
 
 @media (max-width: 700px) {
@@ -66,7 +66,7 @@ body {
 }
 
 ul {
-    font-family: cairo;
+    font-family: 'Montserrat', sans-serif;
     color: rgb(212,212,212);
 }
 
