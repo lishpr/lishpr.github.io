@@ -1,17 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>About Me</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="home.css">
     <link href="fontawesome-free-5.11.2-web\css\all.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
-    <title>My Courses</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 </head>
+
 <body>
     <nav id="mainNavbar" class="navbar navbar-dark navbar-expand-md fixed-top">
         <a href="index.html" class="navbar-brand">Li<span>/</span>WORK</a>
@@ -33,15 +39,18 @@
         </div>
     </nav>
 
-    <div class="jumbotron jumbotron-fluids">
-        <br>
-        <br>
-        <div class="container">
-            <h2 style="font-family: 'Montserrat'">
-                My Courses Taken
-            </h2>
+    <div class="jumbotron jumbotron-fluid" style="font-family: 'Montserrat'">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                <img class="d-block w-100" src="images/coursebanner.jpeg" alt="First slide">
+            </div>
+
         </div>
-    </div>
+        
+    <br>
+    <br>
+
 
     <section class="container" style="font-family: 'Montserrat'">
         <h4 class="text-white" id="projects" style="font-family: 'Montserrat'">Graduate coursework!</h4>
@@ -89,7 +98,7 @@
         </h5>
 
         <div class="card-deck">
-        <div class="card bg-light mb-3">
+        <div class="card text-dark bg-light mb-3">
             <div class="card-header"><i class="fas fa-user-cog"></i> Core Application</div>
             <div class="card-body">
                 <h5 class="card-title">Software Engineering </h5>
@@ -109,7 +118,7 @@
                 </div>
             </div>
         </div>
-        <div class="card bg-light mb-3">
+        <div class="card text-dark bg-light mb-3">
             <div class="card-header"><i class="fas fa-user-cog"></i> Core Application</div>
             <div class="card-body">
                 <h5 class="card-title">Computer Vision and Robotics</h5>
@@ -139,7 +148,7 @@
                 </div>
             </div>
         </div>
-        <div class="card bg-light mb-3">
+        <div class="card text-dark bg-light mb-3">
             <div class="card-header"><i class="fas fa-user-cog"></i> Core Application</div>
             <div class="card-body">
                 <h5 class="card-title">Databases</h5>
@@ -506,11 +515,11 @@
             <a href="https://github.com/ossu/computer-science">&#x1F393; Path to a free self-taught education in Computer Science!</a>
             curriculum. Which helped me to organize my courses and provided paths to my somewhat self-guided CS education.
         </h5>
-    </section>
-    <br>
-    <br>
+        </section>
 
-    <footer class="page-footer font-small blue ftr">
+    <br>
+    <br>
+     <footer class="page-footer font-small blue ftr">
 
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3">2020 Xiaoli "Li" Yu
@@ -532,4 +541,5 @@
     </script>
     
 </body>
+
 </html>
