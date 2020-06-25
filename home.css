@@ -257,3 +257,11 @@ h4 span{
        -o-transform: translateY(0px);
           transform: translateY(0px);
 }
+
+.bg-overlay {
+   height: 100%;
+   width:  100%;
+   position: absolute;
+   background-color:#000;
+   opacity:.7;
+}
