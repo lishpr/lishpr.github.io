@@ -274,6 +274,12 @@ h4 span{
 
 .list-group-item.active {
   z-index: 2;
+  color: #495057;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.list-group-item {
   color: #fff;
   background-color: #303030;
   border-color: #303030;
