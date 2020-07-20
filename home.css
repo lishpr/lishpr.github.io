@@ -70,10 +70,16 @@ ul {
     color: rgb(212,212,212);
 }
 
+
 .jumbotron{
-    background: rgb(30,30,30);
+  background: rgb(30,30,30);
+  color: rgb(212,212,212);
+  padding-top: 5%;
+}
+
+.back{
+    background: rgb(60,60,60);
     color: rgb(212,212,212);
-    margin-top: 1%;
 }
 
 h4 span{
@@ -264,4 +270,11 @@ h4 span{
    position: absolute;
    background-color:#000;
    opacity:.7;
+}
+
+.list-group-item.active {
+  z-index: 2;
+  color: #fff;
+  background-color: #303030;
+  border-color: #303030;
 }
