@@ -59,6 +59,10 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+.sectitle {
+  font-size: 1.15rem;
+}
+
 @media (max-width: 700px) {
     #toptext h1 {
         font-size: 20px;
