@@ -116,7 +116,16 @@ h4 span{
 
 /* Hide the images by default */
 .mySlides {
-  display: none;
+  display: none;  
+}
+
+.hdln {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.bg-gray {
+  background-color: #303030;
 }
 
 /* Next & previous buttons */
