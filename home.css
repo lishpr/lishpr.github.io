@@ -122,6 +122,7 @@ h4 span{
 .hdln {
   padding-top: 1em;
   padding-bottom: 1em;
+  padding-right: 0;
 }
 
 .bg-gray {
