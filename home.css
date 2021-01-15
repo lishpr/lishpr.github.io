@@ -1,14 +1,10 @@
-body {
-    background: rgb(30,30,30);
-}
-
 .navbar.scrolled {
     background: rgb(60,60,60);
     transition: background 500ms;
 }
 
 #mainNavbar .navbar-brand {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Libre Baskerville', serif;
     font-weight: 100;
     color: rgb(173,173,173);
 }
@@ -16,6 +12,117 @@ body {
 #jobtitle {
     font-weight: 700;
 }
+
+.catalogue-line {
+  border-top: 0.2rem solid #353535;
+  display: block;
+  width:5rem
+}
+
+html, body {
+  color: #353535;
+  margin: 0;
+  padding: 0;
+  }
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #353535;
+  font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  line-height:normal
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #353535;
+  font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  line-height:normal
+}
+
+
+
+.container {
+  margin: 0 auto;
+  max-width: 800px;
+  width:80%
+}
+
+main, footer, .nav-container {
+  display: block;
+  margin: 0 auto;
+  max-width: 800px;
+  width:80%
+}
+
+.nav {
+  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.2);
+  overflow:auto
+}
+
+.nav-container {
+  margin: 1rem auto;
+  position: relative;
+  text-align:center
+}
+
+.nav-title {
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  color: #555;
+  display: inline-block;
+  margin: 0;
+  padding-right:.2rem
+}
+
+.nav-title:hover, .nav-title:focus {
+  opacity:.6
+}
+
+.nav ul {
+  list-style-type: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  text-align:center
+}
+
+.nav li {
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  color: #555;
+  display: inline-block;
+  opacity: .6;
+  padding:0 2rem 0 0
+}
+
+.nav li:last-child {
+  padding-right:0
+}
+
+.nav li:hover, .nav li:focus {
+  opacity:1
+}
+
+.nav a {
+  color: #555;
+  font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif
+}
+
+@media (min-width: 600px) {
+  .nav-container {
+      text-align:left
+  }
+
+  .nav ul {
+      bottom: 0;
+      position: absolute;
+      right:0
+  }
+}
+
 
 .navbar-brand span {
     color: rgb(212,212,212);
@@ -31,8 +138,8 @@ img {
 }
 
 #toptext {
-    font-family: 'Montserrat', sans-serif;
-    color: rgb(0,122,204);
+    font-family: 'Libre Baskerville', serif;
+    color: #555;
 }
 
 #toptext span {
@@ -40,7 +147,7 @@ img {
 }
 
 #mainNavbar .nav-link {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Libre Baskerville', serif;
     font-weight: 400;
     color: rgb(0,122,204);
 }
@@ -50,23 +157,20 @@ img {
 }
 
 .icons {
-    color: rgba(156,220,254)
+    color: #353535
 }
 
 #contents {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Libre Baskerville', serif;
     color: rgb(212,212,212)
 }
 
 .table {
     color: rgb(212,212,212);
     padding-bottom: 5rem;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Libre Baskerville', serif;
 }
 
-.sectitle {
-  font-size: 1.1rem;
-}
 
 @media (max-width: 700px) {
     #toptext h1 {
@@ -75,14 +179,13 @@ img {
 }
 
 ul {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Libre Baskerville', serif;
     color: rgb(212,212,212);
 }
 
 
 .jumbotron{
-  background: rgb(30,30,30);
-  color: rgb(212,212,212);
+  background-color: #fff;
   padding-top: 5%;
 }
 
@@ -220,7 +323,7 @@ h4 span{
 
 .wrapper .tooltip {
   background: #ffffff;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Libre Baskerville', serif;
   bottom: 100%;
   color: #000;
   display: block;
@@ -348,4 +451,34 @@ h4 span{
   -ms-transform: scale(1);
   transform: scale(1);
   opacity: 1;
+}
+
+footer {
+  font-family: Palatino, "Palatino LT STD", "Palatino Linotype", "Book Antiqua", "Georgia", serif;
+  padding: 2rem 0;
+  text-align:center
+}
+
+footer span {
+  color: #555;
+  font-size:.8rem
+}
+
+.paginations {
+  border-top: 0.5px solid #e5e5e5;
+  font-family: Palatino, "Palatino LT STD", "Palatino Linotype", "Book Antiqua", "Georgia", serif;
+  padding-top: 2rem;
+  position: relative;
+  text-align:center
+}
+
+.paginations .topp {
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  color: #555;
+  font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 1.1rem;
+  opacity:.6;
+  text-align:center;
 }
