@@ -481,4 +481,16 @@ footer span {
   font-size: 1.1rem;
   opacity:.6;
   text-align:center;
+  text-decoration:none
+}
+
+@font-face {
+  font-family: 'NerdFontsSymbols Nerd Font';
+  src: url("Caskaydia Cove Regular Nerd Font Complete.otf") format("opentype");
+  font-weight: 400;
+  font-style:normal
+}
+
+.nf {
+  font-family: 'NerdFontsSymbols Nerd Font';
 }
